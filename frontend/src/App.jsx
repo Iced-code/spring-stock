@@ -7,21 +7,30 @@ function App() {
   const [data, setData] = useState(null);
 
   const fetchStock = async () => {
-    const res = await fetch(`http://localhost:8080/api/quote?symbol=${symbol}`);
-    const json = await res.json();
-    setData(json);
+    if(symbol.toLowerCase() === "hi backend"){
+      const res = await fetch(`http://localhost:8080/api/hello`);
+      const json = await res.json();
+      setData(json);
+    } 
+    else {
+      const res = await fetch(`http://localhost:8080/api/quote?symbol=${symbol}`);
+      const json = await res.json();
+      setData(json);
+    }
   };
 
   return (
     <div style={{ padding: "1rem", fontFamily: "Arial" }}>
       <h1>Stock Price Checker</h1>
-      <input
+      <div class="searchbar">
+        <input
         value={symbol}
         onChange={(e) => setSymbol(e.target.value)}
         placeholder="Enter stock symbol"
-      />
-      <button onClick={fetchStock}>Get Quote</button>
-
+        />
+        <button onClick={fetchStock} className='search'>Search</button>
+      </div>
+      
       {data && (
         <div style={{ marginTop: "1rem" }}>
           <h2>{symbol}</h2>

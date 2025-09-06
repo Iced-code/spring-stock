@@ -1,8 +1,15 @@
+body {
+  background-color: rgb(15, 29, 52);
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  background-color: rgb(40, 68, 113);
+  border-radius: 20px;
 }
 
 .logo {
@@ -39,4 +46,13 @@
 
 .read-the-docs {
   color: #888;
+}
+
+input {
+  padding: 1.3rem 2rem;
+  font-size: 18px;
+}
+
+.searchbar button {
+  display: inline-flex;
 }

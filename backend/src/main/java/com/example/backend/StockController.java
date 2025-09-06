@@ -1,5 +1,6 @@
 package com.example.backend;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +10,10 @@ import reactor.core.publisher.Mono;
 @RestController
 public class StockController {
     private final WebClient webClient;
-    private final String API_KEY = "d2aln69r01qgk9ufh7vgd2aln69r01qgk9ufh800";
+
+    //@Value("${finnhub.api.key}")
+    @Value("${FINNHUB_API_KEY}")
+    private String API_KEY;
 
     public StockController(){
         this.webClient = WebClient.builder()
