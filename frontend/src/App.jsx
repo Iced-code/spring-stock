@@ -7,14 +7,18 @@ function App() {
   const [result, setResult] = useState(null);
   const [data, setData] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
+
   const fetchStock = async () => {
     if(result.toLowerCase() === "hi backend!"){
-      const res = await fetch(`http://localhost:8080/api/hello`);
+      //const res = await fetch(`http://localhost:8080/api/hello`);
+      const res = await fetch(`${API_URL}/api/hello`);
       const text = await res.text();
       setData(text);
     } 
     else {
-      const res = await fetch(`http://localhost:8080/api/quote?symbol=${result}`);
+      //const res = await fetch(`http://localhost:8080/api/quote?symbol=${result}`);
+      const res = await fetch(`${API_URL}/api/quote?symbol=${result}`);
       const json = await res.json();
 
       if(json.d !== null){

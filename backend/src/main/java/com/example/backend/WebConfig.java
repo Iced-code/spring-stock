@@ -12,8 +12,8 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry){
-                registry.addMapping("/api/**")
-                    .allowedOrigins("http://localhost:5173")
+                registry.addMapping("/**")
+                    .allowedOrigins("http://localhost:5173", "https://iced-code.github.io/spring-stock/")
                     .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
