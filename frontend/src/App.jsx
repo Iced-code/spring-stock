@@ -11,14 +11,14 @@ function App() {
 
   const fetchStock = async () => {
     if(result.toLowerCase() === "hi backend!"){
-      //const res = await fetch(`http://localhost:8080/api/hello`);
-      const res = await fetch(`${API_URL}/api/hello`);
+      const res = await fetch(`http://localhost:8080/api/hello`);
+      //const res = await fetch(`${API_URL}/api/hello`);
       const text = await res.text();
       setData(text);
     } 
     else {
-      //const res = await fetch(`http://localhost:8080/api/quote?symbol=${result}`);
-      const res = await fetch(`${API_URL}/api/quote?symbol=${result}`);
+      const res = await fetch(`http://localhost:8080/api/quote?symbol=${result}`);
+      //const res = await fetch(`${API_URL}/api/quote?symbol=${result}`);
       const json = await res.json();
 
       if(json.d !== null){
