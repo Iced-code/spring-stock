@@ -3,19 +3,24 @@ import './App.css';
 import { useState, useEffect } from "react";
 
 function App() {
-  const [symbol, setSymbol] = useState("AAPL");
+  const [symbol, setSymbol] = useState("");
+  const [result, setResult] = useState(null);
   const [data, setData] = useState(null);
 
   const fetchStock = async () => {
-    if(symbol.toLowerCase() === "hi backend"){
+    if(result.toLowerCase() === "hi backend!"){
       const res = await fetch(`http://localhost:8080/api/hello`);
-      const json = await res.json();
-      setData(json);
+      const text = await res.text();
+      setData(text);
     } 
     else {
-      const res = await fetch(`http://localhost:8080/api/quote?symbol=${symbol}`);
+      const res = await fetch(`http://localhost:8080/api/quote?symbol=${result}`);
       const json = await res.json();
-      setData(json);
+
+      if(json.d !== null){
+        setData(json);
+        setSymbol(result);
+      }
     }
   };
 
@@ -24,20 +29,25 @@ function App() {
       <h1>Stock Price Checker</h1>
       <div class="searchbar">
         <input
-        value={symbol}
-        onChange={(e) => setSymbol(e.target.value)}
+        value={result}
+        onChange={(e) => setResult(e.target.value)}
         placeholder="Enter stock symbol"
         />
         <button onClick={fetchStock} className='search'>Search</button>
       </div>
       
-      {data && (
+      {data && typeof(data) == "object" && (
         <div style={{ marginTop: "1rem" }}>
-          <h2>{symbol}</h2>
-          <p>Current Price: ${data.c}</p>
-          <p>Open: ${data.o}</p>
-          <p>High: ${data.h}</p>
-          <p>Low: ${data.l}</p>
+          <h2><span style={{textDecoration: "underline", textDecorationColor:"whitesmoke"}}>{symbol}</span></h2>
+          <h2>Current Price: ${data.c}</h2>
+          <p>Last Close Price: ${data.pc}</p>
+          <p>Price Percent Change: <span style={{backgroundColor: data.dp >= 0 ? "green" : "red", color:"whitesmoke", padding:"0.5rem"}}>{data.dp}%</span>
+          </p>
+        </div>
+      )}
+      {data && typeof(data) == "string" && (
+        <div style={{ color: "whitesmoke", marginTop: "1rem" }}>
+          <h2>{data}</h2>
         </div>
       )}
     </div>

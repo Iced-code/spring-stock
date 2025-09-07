@@ -1,5 +1,6 @@
 body {
-  background-color: rgb(15, 29, 52);
+  color: rgb(77, 117, 180);
+  background-color: rgb(21, 21, 21);
 }
 
 #root {
@@ -8,7 +9,7 @@ body {
   padding: 2rem;
   text-align: center;
 
-  background-color: rgb(40, 68, 113);
+  background-color: rgb(31, 31, 31);
   border-radius: 20px;
 }
 
