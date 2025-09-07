@@ -13,7 +13,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry){
                 registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:5173", "https://iced-code.github.io/spring-stock/")
+                    .allowedOrigins("http://localhost:5173", "https://iced-code.github.io")
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                     .allowedHeaders("*");
             }
