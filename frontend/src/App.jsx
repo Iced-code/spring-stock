@@ -12,18 +12,26 @@ function App() {
   const fetchStock = async () => {
     if(result.toLowerCase() === "hi backend!"){
       const res = await fetch(`http://localhost:8080/api/hello`);
-      //const res = await fetch(`${API_URL}/api/hello`);
       const text = await res.text();
       setData(text);
     } 
     else {
-      const res = await fetch(`http://localhost:8080/api/quote?symbol=${result}`);
-      //const res = await fetch(`${API_URL}/api/quote?symbol=${result}`);
-      const json = await res.json();
+      try {
+        const res = await fetch(`http://localhost:8080/api/quote?symbol=${result}`);
+        const json = await res.json();
 
-      if(json.d !== null){
-        setData(json);
-        setSymbol(result);
+        if(json.d !== null){
+          setData(json);
+          setSymbol(result);
+        }
+        else {
+          const text = "Error in getting stock info.";
+          setData(text);
+        }
+      }
+      catch (error) {
+        const text = "Error in getting info.";
+        setData(text);
       }
     }
   };
@@ -31,7 +39,7 @@ function App() {
   return (
     <div style={{ padding: "1rem", fontFamily: "Arial" }}>
       <h1>Stock Price Checker</h1>
-      <div class="searchbar">
+      <div className="searchbar">
         <input
         value={result}
         onChange={(e) => setResult(e.target.value)}
