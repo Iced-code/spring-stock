@@ -23,6 +23,7 @@ function App() {
         if(json.d !== null){
           setData(json);
           setSymbol(result);
+          setResult("");
         }
         else {
           const text = "Error in getting stock info.";
@@ -38,7 +39,7 @@ function App() {
 
   return (
     <div style={{ padding: "1rem", fontFamily: "Arial" }}>
-      <h1>Stock Price Checker</h1>
+      <h1 style={{ color:"#4d75b4"}}>Stock Price Checker</h1>
       <div className="searchbar">
         <input
         value={result}
@@ -51,9 +52,9 @@ function App() {
       {data && typeof(data) == "object" && (
         <div style={{ marginTop: "1rem" }}>
           <h2><span style={{textDecoration: "underline", textDecorationColor:"whitesmoke"}}>{symbol}</span></h2>
-          <h2>Current Price: ${data.c}</h2>
-          <p>Last Close Price: ${data.pc}</p>
-          <p>Price Percent Change: <span style={{backgroundColor: data.dp >= 0 ? "green" : "red", color:"whitesmoke", padding:"0.5rem"}}>{data.dp}%</span>
+          <h2>Current Price: ${data.c.toFixed(2)}</h2>
+          <p>Last Close Price: ${data.pc.toFixed(2)}</p>
+          <p>Price Percent Change: <span style={{backgroundColor: data.dp >= 0 ? "green" : "red", color:"whitesmoke", padding:"0.5rem"}}>{data.dp.toFixed(2)}%</span>
           </p>
         </div>
       )}
